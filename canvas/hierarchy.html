@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>层次关系图</title>
+  <style type="text/css">
+    #app {
+        width: 1200px;
+        height: 1200px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="app" width="1200" height="1200"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript">
+
+var data = {
+    "name": "中国",
+    "children": [
+      {
+        "name": "浙江",
+        "children": [
+          {
+            "name": "杭州"
+          },
+          {
+            "name": "宁波"
+          },
+          {
+            "name": "温州"
+          },
+          {
+            "name": "绍兴"
+          }
+        ]
+      },
+      {
+        "name": "广西",
+        "children": [
+          {
+            "name": "桂林"
+          },
+          {
+            "name": "南宁"
+          },
+          {
+            "name": "柳州"
+          },
+          {
+            "name": "防城港"
+          }
+        ]
+      },
+      {
+        "name": "黑龙江",
+        "children": [
+          {
+            "name": "哈尔滨"
+          },
+          {
+            "name": "齐齐哈尔"
+          },
+          {
+            "name": "牡丹江"
+          },
+          {
+            "name": "大庆"
+          }
+        ]
+      },
+      {
+        "name": "新疆",
+        "children": [
+          {
+            "name": "乌鲁木齐"
+          },
+          {
+            "name": "克拉玛依"
+          },
+          {
+            "name": "吐鲁番"
+          },
+          {
+            "name": "哈密"
+          }
+        ]
+      },
+      {
+        "name": "河北",
+        "children": [
+          {
+            "name": "石家庄"
+          },
+          {
+            "name": "唐山"
+          },
+          {
+            "name": "邯郸"
+          },
+          {
+            "name": "秦皇岛"
+          }
+        ]
+      },
+      {
+        "name": "西藏",
+        "children": [
+          {
+            "name": "拉萨"
+          },
+          {
+            "name": "昌都"
+          },
+          {
+            "name": "林芝"
+          }
+        ]
+      },
+      {
+        "name": "江苏",
+        "children": [
+          {
+            "name": "南京"
+          },
+          {
+            "name": "无锡"
+          },
+          {
+            "name": "徐州"
+          },
+          {
+            "name": "常州"
+          },
+          {
+            "name": "连云港"
+          },
+          {
+            "name": "淮安"
+          }
+        ]
+      },
+      {
+        "name": "江苏",
+        "children": [
+          {
+            "name": "南京"
+          },
+          {
+            "name": "无锡"
+          },
+          {
+            "name": "徐州"
+          },
+          {
+            "name": "常州"
+          },
+          {
+            "name": "连云港"
+          },
+          {
+            "name": "淮安"
+          }
+        ]
+      },
+      {
+        "name": "湖南",
+        "children": [
+          {
+            "name": "长沙"
+          },
+          {
+            "name": "株洲"
+          },
+          {
+            "name": "湘潭"
+          },
+          {
+            "name": "衡阳"
+          },
+          {
+            "name": "邵阳"
+          },
+          {
+            "name": "岳阳"
+          }
+        ]
+      },
+      {
+        "name": "海南",
+        "children": [
+          {
+            "name": "海口"
+          },
+          {
+            "name": "三亚"
+          },
+          {
+            "name": "三沙"
+          }
+        ]
+      },
+      {
+        "name": "陕西",
+        "children": [
+          {
+            "name": "西安"
+          },
+          {
+            "name": "咸阳"
+          },
+          {
+            "name": "汉中"
+          },
+          {
+            "name": "安康"
+          },
+          {
+            "name": "榆林"
+          },
+          {
+            "name": "延安"
+          }
+        ]
+      },
+      {
+        "name": "甘肃",
+        "children": [
+          {
+            "name": "兰州"
+          },
+          {
+            "name": "酒泉"
+          },
+          {
+            "name": "金昌"
+          },
+          {
+            "name": "天水"
+          },
+          {
+            "name": "嘉峪关"
+          },
+          {
+            "name": "武威"
+          }
+        ]
+      }
+    ]
+  }
+
+
+
+
+
+
+  const regions = d3.hierarchy(data)
+    .sum(d => 1)
+    .sort((a, b) => b.value - a.value);
+
+  const pack = d3.pack()
+    .size([1200, 1200])
+    .padding(3);
+
+  const root = pack(regions);
+
+
+const TAU = 2 * Math.PI;
+
+function draw(ctx, node, {fillStyle = 'rgba(0, 0, 0, 0.2)', textColor = 'white'} = {}) {
+  const children = node.children;
+  const {x, y, r} = node;
+  ctx.fillStyle = fillStyle;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, TAU);
+  ctx.fill();
+  if(children) {
+    for(let i = 0; i < children.length; i++) {
+      draw(ctx, children[i]);
+    }
+  } else {
+    const name = node.data.name;
+    ctx.fillStyle = textColor;
+    ctx.font = '1.5rem Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(name, x, y);
+  }
+}
+
+var canvas = document.getElementById('app')
+// var canvas = document.querySelector('app')
+var context = canvas.getContext('2d')
+
+draw(context, root);
+
+
+</script>
+</body>
+</html>
