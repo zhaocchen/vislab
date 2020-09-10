@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+  
+    .container {
+        width: 620px;
+        height: auto;
+       /* display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap; */
+    }
+
+    .container { 
+        content: ""; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+       animation: animate 10s linear infinite;
+    }
+
+    @keyframes animate { 
+        
+
+        0% { 
+            top: 100%; 
+        }
+
+        50% { 
+            top: 50%; 
+        }
+
+        100% { 
+            top: 0; 
+        }
+
+    } 
+    .circle {
+        border-radius: 50%;
+        text-align: center;
+        float: left;
+    }
+  </style>
+</head>
+<body>
+
+
+<div id="container" class="container">
+
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+var ele = document.getElementById("container")
+
+
+
+
+var circle = `<div class="circle" style="width: 60px; height: 60px; line-height: 60px;background-color: red">hhah</div>`
+
+$(ele).append(circle)
+
+var colors = ["#6cc569" , "#f6f469" , "#6860ce" , "#4a9aec" , "#2773e5" , "#004b72" , "#ff8a23" , "#2248d7" , "#015c60" , "#ae53bc" , "#12ddef" , "#0075a9" , "#cc1a83" , "#0e7e55" , "#002dc3" , "#f7ae68" , "#08b8f2" , "#c744b3" , "#68d4f7" , "#b6503c" , "#f97960" , "#4f8516" , "#efe390" , "#cc8241"
+]
+
+
+var allData = new Array(260).fill(0)
+
+for(let index in allData) {
+    var width = Math.round(Math.random() * 50) + 60
+    var marginTop = Math.round(Math.random() * (120- width))
+    var marginLeft = Math.round(Math.random() * 40) + 20
+    var floatDir = Math.round(Math.random() * 20) % 2 == 0 ? 'left' : 'right';
+    var color = colors[index%colors.length]
+    console.log(width, marginLeft, floatDir)
+    var circle = `<div class="circle" style="width: ${width}px; height: ${width}px; 
+    line-height: ${width}px;
+    background-color: ${color}; 
+    margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
+    float: ${floatDir}
+    ">hhah</div>`
+    $(ele).append(circle)
+}
+
+</script>
+
+</body>
+</html>
