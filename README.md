@@ -9,14 +9,14 @@
 
 [echarts实现](https://zhaocchen.github.io/vislab/echarts)
 
-[游戏-投掷骰子craps](https://zhaocchen.github.io/vislab/game/craps/craps.html)
+[游戏-投掷骰子craps](https://zhaocchen.github.io/vislab/craps/craps.html)
 
 
 
 小动画：
 
-[闪烁的星星](https://zhaocchen.github.io/star_twinkle.html)
+[闪烁的星星](https://zhaocchen.github.io/vislab/animate/star_twinkle.html)
 
-[0过渡到100](https://zhaocchen.github.io/timer.html)
+[0过渡到100](https://zhaocchen.github.io/vislab/animate/timer.html)
 
 

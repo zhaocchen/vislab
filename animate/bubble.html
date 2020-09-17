@@ -34,17 +34,27 @@
         width: 100%;
         height: 100%;
         list-style: none;
-        animation: animation 10s linear infinite;
+        animation: animation 20s linear infinite;
+      }
+      
+      .circle_list {
+
       }
 
-      @keyframes animation {
+      .circle_list:after {
+        display: block;
+        clear: both;
+        content: "";
+      }
+
+      /* @keyframes animation {
         from {
           top: 0;
         }
         to {
-          top: -100vh;
+          top: -100%;
         }
-      }
+      } */
       .circle {
         border-radius: 50%;
         text-align: center;
@@ -54,7 +64,9 @@
   </head>
   <body>
     <div id="container" class="container">
-      <div id="circleWrap" class="circle_wrap"></div>
+      <div id="circleWrap" class="circle_wrap">
+        <div id="circleList" class="circle_list"></div>
+      </div>
     </div>
 
     <script
@@ -63,7 +75,7 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript">
-      var ele = document.getElementById("circleWrap");
+      var ele = document.getElementById("circleList");
 
       var circle = `<div class="circle" style="width: 60px; height: 60px; line-height: 60px;background-color: red">hhah</div>`;
 
@@ -96,7 +108,7 @@
         "#cc8241",
       ];
 
-      var allData = new Array(260).fill(0);
+      var allData = new Array(60).fill(0);
 
       for (let index in allData) {
         var width = Math.round(Math.random() * 50) + 60;
@@ -111,9 +123,25 @@
     background-color: ${color}; 
     margin-left: ${marginLeft}px; margin-top: ${marginTop}px;
     float: ${floatDir}
-    ">hhah</div>`;
+    ">${index}</div>`;
         $(ele).append(circle);
       }
+
+      console.log($(ele).height())
+
+      var h = $(ele).height()
+
+
+      const circleframes =` @keyframes animation{
+          from {
+                  top: 0;
+                }
+                to {
+                  top: -${h}px;
+                }
+        }`;
+
+      document.styleSheets[0].insertRule(circleframes)
     </script>
   </body>
 </html>
