@@ -15,5 +15,8 @@
 
 小动画：
 
-[闪烁的星星](https://zhaocchen.github.io/vislab/d3/v4/progress-line.html)
+[闪烁的星星](https://zhaocchen.github.io/star_twinkle.html)
+
+[0过渡到100](https://zhaocchen.github.io/timer.html)
+
 
