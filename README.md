@@ -19,4 +19,6 @@
 
 [0过渡到100](https://zhaocchen.github.io/vislab/animate/timer.html)
 
+[旋转的正方形](https://zhaocchen.github.io/vislab/animate/rotate_square.html)
+
 
